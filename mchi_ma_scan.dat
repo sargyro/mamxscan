@@ -1,0 +1,31 @@
+import -modelname Pseudoscalar_2HDM
+define darkmatter xd #This command is only necessary if you want to 'force' a DM candidate
+generate relic_density #You can also exclude particles with the '/' syntax
+output mchi_ma_scan
+
+launch
+set tanbeta 1
+set sinp 0.35
+set lam3 3
+set laP1 3
+set laP2 3
+set gPXd 1
+set sinbma 1
+
+set MXd scan:[x for x in range(10,202,2)]
+
+set mh1 125
+
+# m_a
+set mh4 scan:[x for x in range(10, 502, 2)]
+
+# heavy higgses (m_A)
+set mh3 1200
+set mh2 1200
+set mhc 1200
+
+set Wh1 AUTO
+set Wh2 AUTO
+set Wh3 AUTO
+set Wh4 AUTO
+set whc AUTO
