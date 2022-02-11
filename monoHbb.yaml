@@ -1,7 +1,7 @@
 dependent_variables:
 - values:
   - value:  10.805084745762713
-  - value:  25.63559322033899
+  - value:  31.25
   - value:  53.17796610169489
   - value:  78.07203389830511
   - value:  102.43644067796612
@@ -17,8 +17,8 @@ dependent_variables:
   - value:  11.334745762711862
 independent_variables:
 - values:
-  - value: 50
-  - value: 50
+  - value: 62.5
+  - value: 62.5
   - value: 104
   - value: 155.42857142857142
   - value: 204.2857142857143
