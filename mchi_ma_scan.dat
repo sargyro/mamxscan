@@ -1,4 +1,4 @@
-import -modelname Pseudoscalar_2HDM
+import model Pseudoscalar_2HDM-relic -modelname
 define darkmatter xd #This command is only necessary if you want to 'force' a DM candidate
 generate relic_density #You can also exclude particles with the '/' syntax
 output mchi_ma_scan
