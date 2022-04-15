@@ -31,10 +31,11 @@ def set_mx_ma(obj, mx, ma):
     obj.ma = ma
     
 def set_omega(obj, omega):
-    obj.Omegah2 = omega    
+    omega = float(omega)
+    obj.Omegah2 = omega if omega > 0 else 1e6 # remove -1 thrown when RD too large
 
 def plot(x_list,y_list,z_list):
-    
+        
     xy = np.column_stack([x_list.flat, y_list.flat])
     
     if INTERPOLATE:
@@ -48,13 +49,15 @@ def plot(x_list,y_list,z_list):
       #plt.contour(grid_x, grid_y, grid_z2, colors='r', levels=[0.12])
     else:
       # No interpolation
+      #plt.tricontourf(x_list, y_list, z_list, levels=[0,0.1176,0.12,0.1224,0.2], cmap='coolwarm', vmin=0, vmax=0.2) # with Planck uncertainty
       plt.tricontourf(x_list, y_list, z_list, levels=[0,0.12,0.2], cmap='coolwarm', vmin=0, vmax=0.2)
     
     plt.axis([x_list.min(),x_list.max(),y_list.min(),y_list.max()])
-    plt.xticks(np.arange(50, 550, 50))
-    plt.yticks(np.arange(0, 550, 50))
     plt.xlabel(r"$m_{a}$ [GeV]", fontsize=15)
     plt.ylabel(r"$m_{\chi}$ [GeV]", fontsize=15)
+    # Restrict the axis ranges
+    #plt.xlim([0,50])
+    #plt.ylim([0,50])
     
     plt.xticks(fontsize=14)
     plt.yticks(fontsize=14)
@@ -65,7 +68,7 @@ def plot(x_list,y_list,z_list):
     axes.tick_params("both", which="minor", length=MINOR_TICK_LENGTH)
     axes.tick_params("x", which="both", top=True)
     axes.tick_params("y", which="both", right=True)
-    
+        
     line_x = np.arange(50, 550, 50)
     line_y = [0.5*i for i in line_x]
     plt.plot(line_x, line_y, 'g--')
@@ -92,9 +95,6 @@ def main():
 	    
     # Print list
     [x.show() for x in RDlist]    
-    #print("x_list = np.array("+str([x.ma for x in RDlist])+")")
-    #print("y_list = np.array("+str([x.mx for x in RDlist])+")")
-    #print("z_list = np.array("+str([x.Omegah2 for x in RDlist])+")")
     
     plot(np.array([x.ma for x in RDlist]).astype(np.float), 
          np.array([x.mx for x in RDlist]).astype(np.float), 
